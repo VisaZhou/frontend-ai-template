@@ -13,8 +13,8 @@ export async function POST(req: Request) {
       message: lastUserMessage
     })
 
-    // 创建 SSE 连接
-    const response = await fetch(`http://localhost:8000/ai/generateStream?message=${encodeURIComponent(lastUserMessage)}`, {
+    // 创建 SSE 连接，使用新的 URL
+    const response = await fetch(`http://localhost:8000/deepseek/chat/ai/generateStream?message=${encodeURIComponent(lastUserMessage)}`, {
       method: "GET",
       headers: {
         "Accept": "text/event-stream",
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
               break
             }
             const chunk = decoder.decode(value, { stream: true })
-            console.log("Received chunk:", chunk) // 添加调试日志
+            console.log("Received chunk:", chunk)
             controller.enqueue(new TextEncoder().encode(chunk))
           }
         } catch (error) {
