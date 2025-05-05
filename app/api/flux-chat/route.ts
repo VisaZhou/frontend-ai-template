@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     })
 
     // 创建 SSE 连接，使用新的 URL
-    const response = await fetch(`http://localhost:8000/deepseek/chat/ai/generateStream?message=${encodeURIComponent(lastUserMessage)}`, {
+    const response = await fetch(`http://localhost:8000/deepseek/chat/ai/memory?message=${encodeURIComponent(lastUserMessage)}`, {
       method: "GET",
       headers: {
         "Accept": "text/event-stream",
