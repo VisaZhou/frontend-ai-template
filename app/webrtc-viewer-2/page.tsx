@@ -10,8 +10,14 @@ export default function ViewerPage() {
 
   const initWebRTC = async () => {
     try {
+      // 公网
+      // const pc = new RTCPeerConnection({
+      //   iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+      // });
+
+      //内网
       const pc = new RTCPeerConnection({
-        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        iceServers: []
       });
 
       peerConnectionRef.current = pc;

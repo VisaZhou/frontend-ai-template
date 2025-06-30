@@ -19,8 +19,13 @@ export default function WebRTCPage() {
       }
 
       // 公网
+      // const configuration = {
+      //   iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+      // };
+
+      //内网
       const configuration = {
-        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        iceServers: []
       };
 
       const peerConnection = new RTCPeerConnection(configuration);
