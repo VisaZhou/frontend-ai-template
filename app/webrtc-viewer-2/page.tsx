@@ -39,7 +39,7 @@ export default function ViewerPage() {
         fetch('http://192.168.1.9:8000/api/signal/candidate/subscriber', {
           method: 'POST',
           body: JSON.stringify({
-            sessionId: 'abc123',
+            sessionId: 'abc1234',
             candidate: event.candidate?.candidate || null,
             sdpMid: event.candidate?.sdpMid || null,
             sdpMLineIndex: event.candidate?.sdpMLineIndex || null,
@@ -64,7 +64,7 @@ export default function ViewerPage() {
         method: 'POST',
         body: JSON.stringify({
           type: 'subscriber',
-          sessionId: 'abc123',
+          sessionId: 'abc1234',
           sdp: offer.sdp
         }),
         headers: { 'Content-Type': 'application/json' }

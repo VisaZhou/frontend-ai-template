@@ -59,7 +59,7 @@ export default function WebRTCPage() {
       const offerResponse = await fetch('http://192.168.1.9:8000/api/signal/offer/publisher', {
         method: 'POST',
         body: JSON.stringify({
-          sessionId: 'abc123',
+          sessionId: 'abc1234',
           sdp: offer.sdp
         }),
         headers: { 'Content-Type': 'application/json' }
@@ -77,7 +77,7 @@ export default function WebRTCPage() {
         await fetch('http://192.168.1.9:8000/api/signal/candidate/publisher', {
           method: 'POST',
           body: JSON.stringify({
-            sessionId: 'abc123',
+            sessionId: 'abc1234',
             candidate: candidate.candidate,
             sdpMid: candidate.sdpMid,
             sdpMLineIndex: candidate.sdpMLineIndex,
