@@ -10,7 +10,7 @@ export default function ViewerPage() {
 
   const initWebRTC = async () => {
     try {
-      // 公网
+      //公网
       // const pc = new RTCPeerConnection({
       //   iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
       // });
@@ -42,10 +42,10 @@ export default function ViewerPage() {
 
       pc.onicecandidate = (event) => {
         console.log('ICE candidate:', event.candidate);
-        fetch('http://192.168.1.9:8000/api/signal/candidate/subscriber', {
+        fetch('http://192.168.78.102:8000/api/lan/candidate/subscriber', {
           method: 'POST',
           body: JSON.stringify({
-            sessionId: 'abc1234',
+            sessionId: 'abc123',
             candidate: event.candidate?.candidate || null,
             sdpMid: event.candidate?.sdpMid || null,
             sdpMLineIndex: event.candidate?.sdpMLineIndex || null,
@@ -66,11 +66,11 @@ export default function ViewerPage() {
       console.log('本地 SDP offer:', offer.sdp);
       await pc.setLocalDescription(offer);
 
-      const offerResponse = await fetch('http://192.168.1.9:8000/api/signal/offer/subscriber', {
+      const offerResponse = await fetch('http://192.168.78.102:8000/api/lan/offer/subscriber', {
         method: 'POST',
         body: JSON.stringify({
           type: 'subscriber',
-          sessionId: 'abc1234',
+          sessionId: 'abc123',
           sdp: offer.sdp
         }),
         headers: { 'Content-Type': 'application/json' }

@@ -22,7 +22,7 @@ export default function WebRTCPage() {
       // const configuration = {
       //   iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
       // };
-      
+
       //内网
       const configuration = {
         iceServers: []
@@ -61,10 +61,10 @@ export default function WebRTCPage() {
       await peerConnection.setLocalDescription(offer);
 
       console.log('发送 Offer 到后端...');
-      const offerResponse = await fetch('http://192.168.1.9:8000/api/signal/offer/publisher', {
+      const offerResponse = await fetch('http://192.168.78.102:8000/api/lan/offer/publisher', {
         method: 'POST',
         body: JSON.stringify({
-          sessionId: 'abc1234',
+          sessionId: 'abc123',
           sdp: offer.sdp
         }),
         headers: { 'Content-Type': 'application/json' }
@@ -79,10 +79,10 @@ export default function WebRTCPage() {
 
       console.log('发送之前缓存的 ICE Candidates...');
       for (const candidate of pendingCandidates) {
-        await fetch('http://192.168.1.9:8000/api/signal/candidate/publisher', {
+        await fetch('http://192.168.78.102:8000/api/lan/candidate/publisher', {
           method: 'POST',
           body: JSON.stringify({
-            sessionId: 'abc1234',
+            sessionId: 'abc123',
             candidate: candidate.candidate,
             sdpMid: candidate.sdpMid,
             sdpMLineIndex: candidate.sdpMLineIndex,
