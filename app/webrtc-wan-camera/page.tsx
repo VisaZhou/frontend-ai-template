@@ -39,11 +39,11 @@ export default function WebRTCPage() {
         if (event.candidate) {
           console.log('收集到本地 ICE candidate:', event.candidate);
 
-          fetch('http://192.168.78.102:8000/api/wan/candidate/publisher', {
+          fetch('http://1.95.14.168:8110/videoTest/candidate/publisher', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              sessionId: 'abc1234',
+              sessionId: '1234567890',
               candidate: event.candidate.candidate,
               sdpMid: event.candidate.sdpMid,
               sdpMLineIndex: event.candidate.sdpMLineIndex
@@ -76,11 +76,11 @@ export default function WebRTCPage() {
       await peerConnection.setLocalDescription(offer);
 
       console.log('发送 Offer 到后端...');
-      const offerRes = await fetch('http://192.168.78.102:8000/api/wan/offer/publisher', {
+      const offerRes = await fetch('http://1.95.14.168:8110/videoTest/offer/publisher', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          sessionId: 'abc1234',
+          sessionId: '1234567890',
           sdp: offer.sdp
         })
       });
@@ -96,7 +96,7 @@ export default function WebRTCPage() {
       // 启动轮询远端 ICE Candidate
       pollTimerRef.current = setInterval(async () => {
         try {
-          const res = await fetch(`http://192.168.78.102:8000/api/wan/candidate/poll?sessionId=abc1234`);
+          const res = await fetch(`http://1.95.14.168:8110/videoTest/candidate/poll?sessionId=1234567890`);
           const candidates = await res.json();
           if (candidates.length > 0) {
             console.log('收到后端 ICE Candidates:', candidates);

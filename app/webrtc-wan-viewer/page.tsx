@@ -13,7 +13,7 @@ export default function ViewerPage() {
   const maxEmptyPollCount = 5;
   const emptyPollCountRef = useRef(0);
 
-  const sessionId = 'abc1234'; // 建议改为参数或动态传入
+  const sessionId = '1234567890'; // 建议改为参数或动态传入
 
   const initWebRTC = async () => {
     try {
@@ -43,7 +43,7 @@ export default function ViewerPage() {
       pc.onicecandidate = (event) => {
         if (event.candidate) {
           console.log('发送本地 ICE candidate:', event.candidate);
-          fetch('http://192.168.78.102:8000/api/wan/candidate/subscriber', {
+          fetch('http://1.95.14.168:8110/videoTest/candidate/subscriber', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -76,7 +76,7 @@ export default function ViewerPage() {
       await pc.setLocalDescription(offer);
       console.log('创建本地 SDP Offer:', offer.sdp);
 
-      const res = await fetch('http://192.168.78.102:8000/api/wan/offer/subscriber', {
+      const res = await fetch('http://1.95.14.168:8110/videoTest/offer/subscriber', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -93,7 +93,7 @@ export default function ViewerPage() {
       // 启动轮询 ICE Candidate
       pollIntervalRef.current = setInterval(async () => {
         try {
-          const resp = await fetch(`http://192.168.78.102:8000/api/wan/candidate/poll?sessionId=${sessionId}`);
+          const resp = await fetch(`http://1.95.14.168:8110/videoTest/candidate/poll?sessionId=${sessionId}`);
           const candidates = await resp.json();
 
           if (candidates.length > 0) {
